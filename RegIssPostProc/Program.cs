@@ -20,8 +20,8 @@ namespace RegIssPostProc
                 {
                     string line = sr.ReadLine();
                     line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 10.0", "{src}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 10.0", "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 12.0", "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 12.0", "{src}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);
@@ -136,18 +136,22 @@ namespace RegIssPostProc
             //    return false;
             //if (path.ToLower().Contains("amd64"))
             //    return false;
-            if (path.ToLower().Contains("silverlight"))
+            //if (path.ToLower().Contains("silverlight"))
+            //    return false;
+            //if (path.ToLower().Contains("microsoft.expression"))
+            //    return false;
+            //if (path.ToLower().Contains("blend"))
+            //{
+            //    int idx = path.ToLower().IndexOf("blend");
+            //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
+            //}
+            if (path.ToLower().Contains("winrt"))
+            {
                 return false;
-            if (path.ToLower().Contains("microsoft.expression"))
-                return false;
+            }
             if (path.ToLower().Contains("arm"))
             {
                 int idx = path.ToLower().IndexOf("arm");
-                return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            }
-            if (path.ToLower().Contains("blend"))
-            {
-                int idx = path.ToLower().IndexOf("blend");
                 return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             }
             return true;

@@ -10,7 +10,7 @@ namespace PortableHelper
     {
         private static void Main(string[] args)
         {
-            using (FileStream fs = new FileStream("VS2010 - 修改.txt", FileMode.Open))
+            using (FileStream fs = new FileStream("VS2013 - 修改.txt", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs))
             {
                 string curDir = "";
@@ -39,8 +39,8 @@ namespace PortableHelper
                             {
                                 continue;
                             }
-                            Directory.CreateDirectory(Path.GetDirectoryName(path.Replace("C:", "Z:\\D\\VS")));
-                            File.Copy(path, path.Replace("C:", "Z:\\D\\VS"), true);
+                            Directory.CreateDirectory(Path.GetDirectoryName(path.Replace("C:", "Z:\\E\\VS")));
+                            File.Copy(path, path.Replace("C:", "Z:\\E\\VS"), true);
                         }
                         catch (Exception e)
                         {
@@ -64,18 +64,22 @@ namespace PortableHelper
             //    return false;
             //if (path.ToLower().Contains("amd64"))
             //    return false;
-            if (path.ToLower().Contains("silverlight"))
+            //if (path.ToLower().Contains("silverlight"))
+            //    return false;
+            //if (path.ToLower().Contains("microsoft.expression"))
+            //    return false;
+            //if (path.ToLower().Contains("blend"))
+            //{
+            //    int idx = path.ToLower().IndexOf("blend");
+            //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
+            //}
+            if (path.ToLower().Contains("winrt"))
+            {
                 return false;
-            if (path.ToLower().Contains("microsoft.expression"))
-                return false;
+            }
             if (path.ToLower().Contains("arm"))
             {
                 int idx = path.ToLower().IndexOf("arm");
-                return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            }
-            if (path.ToLower().Contains("blend"))
-            {
-                int idx = path.ToLower().IndexOf("blend");
                 return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             }
             return true;
