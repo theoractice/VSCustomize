@@ -10,7 +10,7 @@ namespace PortableHelper
     {
         private static void Main(string[] args)
         {
-            using (FileStream fs = new FileStream("VS2013 - 修改.txt", FileMode.Open))
+            using (FileStream fs = new FileStream("VS2015 - 修改.txt", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs))
             {
                 string curDir = "";
@@ -31,7 +31,7 @@ namespace PortableHelper
                     else if (line.Contains("    (+)(文件) "))
                     {
                         line = line.Replace("    (+)(文件) ", "");
-                        line = line.Split(new char[] { '=' })[0].Trim();
+                        line = line.Substring(0, line.LastIndexOf('=') - 1).Trim();
                         string path = Path.Combine(curDir, line);
                         try
                         {
@@ -73,6 +73,10 @@ namespace PortableHelper
             //    int idx = path.ToLower().IndexOf("blend");
             //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             //}
+            if (path.ToLower().Contains("windows phone"))
+            {
+                return false;
+            }
             if (path.ToLower().Contains("winrt"))
             {
                 return false;
