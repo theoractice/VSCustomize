@@ -20,8 +20,8 @@ namespace RegIssPostProc
                 {
                     string line = sr.ReadLine();
                     line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 12.0", "{src}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 12.0", "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);
@@ -145,14 +145,8 @@ namespace RegIssPostProc
             //    int idx = path.ToLower().IndexOf("blend");
             //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             //}
-            if (path.ToLower().Contains("windows phone"))
-            {
-                return false;
-            }
-            if (path.ToLower().Contains("winrt"))
-            {
-                return false;
-            }
+            if (path.ToLower().Contains("windows phone")) return false;
+            if (path.ToLower().Contains("winrt")) return false;
             if (path.ToLower().Contains("arm"))
             {
                 int idx = path.ToLower().IndexOf("arm");

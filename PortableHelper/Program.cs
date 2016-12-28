@@ -73,14 +73,8 @@ namespace PortableHelper
             //    int idx = path.ToLower().IndexOf("blend");
             //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             //}
-            if (path.ToLower().Contains("windows phone"))
-            {
-                return false;
-            }
-            if (path.ToLower().Contains("winrt"))
-            {
-                return false;
-            }
+            if (path.ToLower().Contains("windows phone")) return false;
+            if (path.ToLower().Contains("winrt")) return false;
             if (path.ToLower().Contains("arm"))
             {
                 int idx = path.ToLower().IndexOf("arm");
