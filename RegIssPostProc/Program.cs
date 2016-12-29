@@ -147,6 +147,7 @@ namespace RegIssPostProc
             //}
             if (path.ToLower().Contains("windows phone")) return false;
             if (path.ToLower().Contains("winrt")) return false;
+            if (path.ToLower().Contains("setupcache")) return false;
             if (path.ToLower().Contains("arm"))
             {
                 int idx = path.ToLower().IndexOf("arm");

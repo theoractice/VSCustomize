@@ -70,8 +70,8 @@ namespace lnk2iss
 
 						string line = string.Format(@"Name: ""{0}""; FileName: ""{1}""; Parameters: ""{2}""; WorkingDir: ""{3}""; Comment: ""{4}""; "
                         , name.Replace(@".\ProgramData\Microsoft\Windows\Start Menu\Programs", "{commonprograms}")
-                        .Replace(@".\Visual Studio 2010 Ultimate", "{src}")
-						.Replace(@".\Program Files\Microsoft Visual Studio 10.0", "{src}")
+                        .Replace(@".\Visual Studio 2015", "{src}")
+						.Replace(@".\Program Files\Microsoft Visual Studio 14.0", "{src}")
                         , path
                         , arguments.Replace("\"", "\"\"")
                         , workingdir
@@ -79,8 +79,8 @@ namespace lnk2iss
                         );
 
                         line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 10.0", "{src}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 10.0", "{src}", RegexOptions.IgnoreCase);
+                        line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
+                        line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
                         line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
                         line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
                         line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);
