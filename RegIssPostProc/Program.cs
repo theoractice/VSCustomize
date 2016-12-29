@@ -11,6 +11,8 @@ namespace RegIssPostProc
     {
         static void Main(string[] args)
         {
+            string vsVersion = "12.0";
+
             using (FileStream fs = new FileStream("reg.iss", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("gb2312")))
             using (FileStream nfs = new FileStream("newreg.iss", FileMode.Create))
@@ -20,8 +22,8 @@ namespace RegIssPostProc
                 {
                     string line = sr.ReadLine();
                     line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio 14.0", "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
+                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);

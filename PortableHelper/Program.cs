@@ -10,7 +10,9 @@ namespace PortableHelper
     {
         private static void Main(string[] args)
         {
-            using (FileStream fs = new FileStream("VS2015 - 修改.txt", FileMode.Open))
+            string vsName = "2013";
+
+            using (FileStream fs = new FileStream("VS"+ vsName + " - 修改.txt", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs))
             {
                 string curDir = "";
