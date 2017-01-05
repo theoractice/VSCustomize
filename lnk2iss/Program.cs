@@ -11,8 +11,8 @@ namespace lnk2iss
     {
         static void Main(string[] args)
         {
-            string vsName = "2013";
-            string vsVersion = "12.0";
+            string vsName = "2015";
+            string vsVersion = "14.0";
 
             string[] files = Directory.GetFiles(".", "*.lnk", SearchOption.AllDirectories);
 

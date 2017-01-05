@@ -11,7 +11,7 @@ namespace RegIssPostProc
     {
         static void Main(string[] args)
         {
-            string vsVersion = "12.0";
+            string vsVersion = "14.0";
 
             using (FileStream fs = new FileStream("reg.iss", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("gb2312")))
@@ -21,6 +21,8 @@ namespace RegIssPostProc
                 do
                 {
                     string line = sr.ReadLine();
+                    if (!isValidPath(line)) continue;
+
                     line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
                     line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
@@ -147,6 +149,9 @@ namespace RegIssPostProc
             //    int idx = path.ToLower().IndexOf("blend");
             //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             //}
+            if (path.ToLower().Contains("vmware")) return false;
+            if (path.ToLower().Contains("thinprint")) return false;
+
             if (path.ToLower().Contains("windows phone")) return false;
             if (path.ToLower().Contains("winrt")) return false;
             if (path.ToLower().Contains("setupcache")) return false;
@@ -155,6 +160,31 @@ namespace RegIssPostProc
                 int idx = path.ToLower().IndexOf("arm");
                 return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             }
+
+            if (path.Contains("SOFTWARE\\Classes\\Installer")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\WBEM")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Installer")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Print")) return false;
+            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\Path")) return false;
+            if (path.Contains("Root: HKU")) return false;
+            if (path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet")
+                && path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control")
+                && path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services")) return false;
+
+            /*
+HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Installer
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WBEM
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print
+HKEY_USERS
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\Path 删除并利用脚本添加
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet 只保留control和services
+            */
+
             return true;
         }
     }

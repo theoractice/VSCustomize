@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace PortableHelper
 {
@@ -10,14 +11,15 @@ namespace PortableHelper
     {
         private static void Main(string[] args)
         {
-            string vsName = "2013";
+            string vsName = "2015";
 
             using (FileStream fs = new FileStream("VS"+ vsName + " - 修改.txt", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs))
             {
-                string curDir = "";
-                //for (int i = 0; i < 20000; i++)
-                //    sr.ReadLine();
+                string curDir = null;
+
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 do
                 {
                     string line = sr.ReadLine();
@@ -41,8 +43,8 @@ namespace PortableHelper
                             {
                                 continue;
                             }
-                            Directory.CreateDirectory(Path.GetDirectoryName(path.Replace("C:", "Z:\\E\\VS")));
-                            File.Copy(path, path.Replace("C:", "Z:\\E\\VS"), true);
+                            Directory.CreateDirectory(Path.GetDirectoryName(path.Replace("C:", "Z:\\E\\VS" + vsName)));
+                            File.Copy(path, path.Replace("C:", "Z:\\E\\VS" + vsName), true);
                         }
                         catch (Exception e)
                         {
@@ -52,6 +54,8 @@ namespace PortableHelper
                     }
                 }
                 while (!sr.EndOfStream);
+
+                Console.WriteLine("Time: " + sw.Elapsed);
                 Console.ReadLine();
             }
         }
@@ -75,6 +79,9 @@ namespace PortableHelper
             //    int idx = path.ToLower().IndexOf("blend");
             //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             //}
+            if (path.ToLower().Contains("vmware")) return false;
+            if (path.ToLower().Contains("thinprint")) return false;
+
             if (path.ToLower().Contains("windows phone")) return false;
             if (path.ToLower().Contains("winrt")) return false;
             if (path.ToLower().Contains("setupcache")) return false;
@@ -83,6 +90,16 @@ namespace PortableHelper
                 int idx = path.ToLower().IndexOf("arm");
                 return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
             }
+
+            if (path.Contains("ProgramData\\Microsoft\\Windows\\Start Menu\\Programs")) return false;
+            if (path.Contains("ProgramData\\Package Cache")) return false;
+            if (path.Contains("C:\\Users")) return false;
+            if (path.Contains("Windows\\Installer")) return false;
+            if (path.Contains("Windows\\Microsoft.NET\\Framework\\v4.0.30319\\SetupCache")) return false;
+            if (path.Contains("Windows\\Panther")) return false;
+            if (path.Contains("Windows\\rescache")) return false;
+            if (path.Contains("Windows\\ServiceProfiles")) return false;
+
             return true;
         }
     }
