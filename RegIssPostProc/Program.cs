@@ -162,17 +162,20 @@ namespace RegIssPostProc
             }
 
             if (path.Contains("SOFTWARE\\Classes\\Installer")) return false;
+            if (path.Contains("SOFTWARE\\Microsoft\\RADAR")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\WBEM")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Installer")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Print")) return false;
             if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\Path")) return false;
+            if (path.Contains("SYSTEM\\CurrentControlSet")
+                && path.Contains("SYSTEM\\CurrentControlSet\\Control")
+                && path.Contains("SYSTEM\\CurrentControlSet\\Services")) return false;
+            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Class")) return false;
+            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Lsa")) return false;
+            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger")) return false;
             if (path.Contains("Root: HKU")) return false;
-            if (path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet")
-                && path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control")
-                && path.Contains("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services")) return false;
-
             /*
 HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Installer
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WBEM

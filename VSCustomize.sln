@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortableHelper", "PortableHelper\PortableHelper.csproj", "{23E78700-6114-4E6B-9895-27FE22BDD549}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegIssPostProc", "RegIssPostProc\RegIssPostProc.csproj", "{E6D0847C-AA53-4E54-9677-590453F88E14}"
