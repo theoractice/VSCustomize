@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegIssPostProc", "RegIssPos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lnk2iss", "lnk2iss\lnk2iss.csproj", "{AFCED938-58AE-4F17-8381-1DEF292790DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSC.Shared", "VSC.Shared\VSC.Shared.csproj", "{3D35FD39-934E-40D6-8450-D9B030859EF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AFCED938-58AE-4F17-8381-1DEF292790DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCED938-58AE-4F17-8381-1DEF292790DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFCED938-58AE-4F17-8381-1DEF292790DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

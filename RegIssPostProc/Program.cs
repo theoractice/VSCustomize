@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
+using VSC.Shared;
 
 namespace RegIssPostProc
 {
@@ -11,7 +12,7 @@ namespace RegIssPostProc
     {
         static void Main(string[] args)
         {
-            string vsVersion = "14.0";
+            string vsVersion = SharedFunc.vsVersion;
 
             using (FileStream fs = new FileStream("reg.iss", FileMode.Open))
             using (StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("gb2312")))
@@ -21,21 +22,9 @@ namespace RegIssPostProc
                 do
                 {
                     string line = sr.ReadLine();
-                    if (!isValidPath(line)) continue;
+                    if (!SharedFunc.isValidPath(line)) continue;
 
-                    line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Program Files", "{pf}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Windows\\\\System32", "{sys}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Windows/System32", "{sys}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\Windows", "{win}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/Windows", "{win}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:\\\\ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
-                    line = Regex.Replace(line, "C:/ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
+                    line = SharedFunc.pathReplace(vsVersion, line);
 
                     try
                     {
@@ -128,67 +117,6 @@ namespace RegIssPostProc
                 Console.WriteLine("Completed.");
                 Console.ReadLine();
             }
-        }
-
-        private static bool isValidPath(string path)
-        {
-            //if (path.ToLower().Contains("x64"))
-            //    return false;
-            //if (path.ToLower().Contains("ia64"))
-            //    return false;
-            //if (path.ToLower().Contains("win64"))
-            //    return false;
-            //if (path.ToLower().Contains("amd64"))
-            //    return false;
-            //if (path.ToLower().Contains("silverlight"))
-            //    return false;
-            //if (path.ToLower().Contains("microsoft.expression"))
-            //    return false;
-            //if (path.ToLower().Contains("blend"))
-            //{
-            //    int idx = path.ToLower().IndexOf("blend");
-            //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            //}
-            if (path.ToLower().Contains("vmware")) return false;
-            if (path.ToLower().Contains("thinprint")) return false;
-
-            if (path.ToLower().Contains("windows phone")) return false;
-            if (path.ToLower().Contains("winrt")) return false;
-            if (path.ToLower().Contains("setupcache")) return false;
-            if (path.ToLower().Contains("arm"))
-            {
-                int idx = path.ToLower().IndexOf("arm");
-                return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            }
-
-            if (path.Contains("SOFTWARE\\Classes\\Installer")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\RADAR")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\WBEM")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Installer")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList")) return false;
-            if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Print")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\Path")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet")
-                && path.Contains("SYSTEM\\CurrentControlSet\\Control")
-                && path.Contains("SYSTEM\\CurrentControlSet\\Services")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Class")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Lsa")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger")) return false;
-            if (path.Contains("Root: HKU")) return false;
-            /*
-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Installer
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WBEM
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Print
-HKEY_USERS
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\Path 删除并利用脚本添加
-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet 只保留control和services
-            */
-
-            return true;
         }
     }
 }

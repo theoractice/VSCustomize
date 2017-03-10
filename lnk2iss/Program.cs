@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using VSC.Shared;
 
 namespace lnk2iss
 {
@@ -11,8 +12,8 @@ namespace lnk2iss
     {
         static void Main(string[] args)
         {
-            string vsName = "2015";
-            string vsVersion = "14.0";
+            string vsName = SharedFunc.vsName;
+            string vsVersion = SharedFunc.vsVersion;
 
             string[] files = Directory.GetFiles(".", "*.lnk", SearchOption.AllDirectories);
 
@@ -81,19 +82,7 @@ namespace lnk2iss
                         , comment.Replace("\"", "\"\"")
                         );
 
-                        line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Program Files\\\\Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Program Files/Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Program Files\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Program Files/Common Files", "{cf}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Program Files", "{pf}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Program Files", "{pf}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Windows\\\\System32", "{sys}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Windows/System32", "{sys}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\Windows", "{win}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/Windows", "{win}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:\\\\ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
-                        line = Regex.Replace(line, "C:/ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
+                        line = SharedFunc.pathReplace(vsVersion, line);
 
                         sw.WriteLine(line);
                     }
