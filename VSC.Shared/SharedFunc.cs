@@ -11,7 +11,7 @@ namespace VSC.Shared
     {
         public static string vsName = "2017";
         public static string vsVersion = "15.0";
-        public static string installDir = "vs2017";
+        public static string programFiles = "Program Files";
 
         public static bool isValidPath(string path)
         {
@@ -35,16 +35,16 @@ namespace VSC.Shared
             if (path.ToLower().Contains("vmware")) return false;
             if (path.ToLower().Contains("thinprint")) return false;
 
-            if (path.ToLower().Contains("windows phone")) return false;
-            if (path.ToLower().Contains("winrt")) return false;
-            if (path.ToLower().Contains("setupcache")) return false;
-            if (path.ToLower().Contains("arm"))
-            {
-                int idx = path.ToLower().IndexOf("arm");
-                return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            }
+            //if (path.ToLower().Contains("windows phone")) return false;
+            //if (path.ToLower().Contains("winrt")) return false;
+            //if (path.ToLower().Contains("setupcache")) return false;
+            //if (path.ToLower().Contains("arm"))
+            //{
+            //    int idx = path.ToLower().IndexOf("arm");
+            //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
+            //}
 
-            if (path.Contains("ProgramData\\Microsoft\\Windows\\Start Menu\\Programs")) return false;
+            //if (path.Contains("ProgramData\\Microsoft\\Windows\\Start Menu\\Programs")) return false;
             if (path.Contains("ProgramData\\Package Cache")) return false;
             if (path.Contains("C:\\Users")) return false;
             if (path.Contains("Windows\\Installer")) return false;
@@ -58,12 +58,11 @@ namespace VSC.Shared
             if (path.Contains("SOFTWARE\\Microsoft\\WBEM")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Installer")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")) return false;
+            if (path.Contains("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Installer")) return false;
+            if (path.Contains("SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList")) return false;
             if (path.Contains("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Print")) return false;
             if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\Path")) return false;
-            if (path.Contains("SYSTEM\\CurrentControlSet")
-                && path.Contains("SYSTEM\\CurrentControlSet\\Control")
-                && path.Contains("SYSTEM\\CurrentControlSet\\Services")) return false;
             if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Class")) return false;
             if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\Lsa")) return false;
             if (path.Contains("SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger")) return false;
@@ -85,19 +84,19 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet 只保留control和services
 
         public static string pathReplace(string vsVersion, string line)
         {
-            line = Regex.Replace(line, "Sky123.Org", "Administrator", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\" + installDir + "\\\\Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/"+ installDir + "/Microsoft Visual Studio " + vsVersion, "{src}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\" + installDir + "\\\\Common Files", "{cf}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/" + installDir + "/Common Files", "{cf}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\" + installDir + "", "{pf}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/" + installDir + "", "{pf}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\Windows\\\\System32", "{sys}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/Windows/System32", "{sys}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\Windows", "{win}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/Windows", "{win}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:\\\\ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
-            line = Regex.Replace(line, "C:/ProgramData", "{commonappdata}", RegexOptions.IgnoreCase);
+            line = line.Replace("Sky123.Org", "Administrator");
+            line = line.Replace("C:\\" + programFiles + "\\Microsoft Visual Studio " + vsVersion, "{src}");
+            line = line.Replace("C:/" + programFiles + "/Microsoft Visual Studio " + vsVersion, "{src}");
+            line = line.Replace("C:\\" + programFiles + "\\Common Files", "{cf}");
+            line = line.Replace("C:/" + programFiles + "/Common Files", "{cf}");
+            line = line.Replace("C:\\" + programFiles + "", "{pf}");
+            line = line.Replace("C:/" + programFiles + "", "{pf}");
+            line = line.Replace("C:\\Windows\\System32", "{sys}");
+            line = line.Replace("C:/Windows/System32", "{sys}");
+            line = line.Replace("C:\\Windows", "{win}");
+            line = line.Replace("C:/Windows", "{win}");
+            line = line.Replace("C:\\ProgramData", "{commonappdata}");
+            line = line.Replace("C:/ProgramData", "{commonappdata}");
             return line;
         }
     }

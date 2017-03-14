@@ -106,6 +106,12 @@ namespace RegIssPostProc
                             newline = newline.Insert(newline.IndexOf("SubKey:") + 8, "\"");
                             newline = newline.Insert(newline.IndexOf("ValueType:") - 2, "\"");
                         }
+
+                        if(newline.Contains("Wow6432Node"))
+                        {
+                            newline = newline + "; Check: IsWin64;";
+                        }
+
                         sw.WriteLine(newline);
                     }
                     catch (Exception)

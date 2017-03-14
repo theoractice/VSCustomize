@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lnk2iss", "lnk2iss\lnk2iss.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSC.Shared", "VSC.Shared\VSC.Shared.csproj", "{3D35FD39-934E-40D6-8450-D9B030859EF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pathman", "pathman\pathman.csproj", "{E992F058-6276-4F5B-A4FF-47BE80DBA7AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D35FD39-934E-40D6-8450-D9B030859EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E992F058-6276-4F5B-A4FF-47BE80DBA7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E992F058-6276-4F5B-A4FF-47BE80DBA7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E992F058-6276-4F5B-A4FF-47BE80DBA7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E992F058-6276-4F5B-A4FF-47BE80DBA7AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

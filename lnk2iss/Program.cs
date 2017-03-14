@@ -14,6 +14,7 @@ namespace lnk2iss
         {
             string vsName = SharedFunc.vsName;
             string vsVersion = SharedFunc.vsVersion;
+            string programFiles = SharedFunc.programFiles;
 
             string[] files = Directory.GetFiles(".", "*.lnk", SearchOption.AllDirectories);
 
@@ -75,7 +76,7 @@ namespace lnk2iss
                         string line = string.Format(@"Name: ""{0}""; FileName: ""{1}""; Parameters: ""{2}""; WorkingDir: ""{3}""; Comment: ""{4}""; "
                         , name.Replace(@".\ProgramData\Microsoft\Windows\Start Menu\Programs", "{commonprograms}")
                         .Replace(@".\Visual Studio " + vsName, "{src}")
-                        .Replace(@".\Program Files\Microsoft Visual Studio " + vsVersion, "{src}")
+                        .Replace(@".\" + programFiles + @"\Microsoft Visual Studio " + vsVersion, "{src}")
                         , path
                         , arguments.Replace("\"", "\"\"")
                         , workingdir
