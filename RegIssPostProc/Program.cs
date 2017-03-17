@@ -22,6 +22,7 @@ namespace RegIssPostProc
                 do
                 {
                     string line = sr.ReadLine();
+                    if (line.Contains("[Code]")) break;
                     if (!SharedFunc.isValidPath(line)) continue;
 
                     line = SharedFunc.pathReplace(vsVersion, line);

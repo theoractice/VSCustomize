@@ -9,8 +9,8 @@ namespace VSC.Shared
 {
     public class SharedFunc
     {
-        public static string vsName = "2017";
-        public static string vsVersion = "15.0";
+        public static string vsName = "2015";
+        public static string vsVersion = "14.0";
         public static string programFiles = "Program Files";
 
         public static bool isValidPath(string path)
@@ -34,6 +34,7 @@ namespace VSC.Shared
             //}
             if (path.ToLower().Contains("vmware")) return false;
             if (path.ToLower().Contains("thinprint")) return false;
+            if (path.ToLower().Contains("group policy")) return false;
 
             //if (path.ToLower().Contains("windows phone")) return false;
             //if (path.ToLower().Contains("winrt")) return false;
