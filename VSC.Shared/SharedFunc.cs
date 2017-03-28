@@ -9,8 +9,8 @@ namespace VSC.Shared
 {
     public class SharedFunc
     {
-        public static string vsName = "2015";
-        public static string vsVersion = "14.0";
+        public static string vsName = "2013";
+        public static string vsVersion = "12.0";
         public static string programFiles = "Program Files";
 
         public static bool isValidPath(string path)
@@ -36,14 +36,14 @@ namespace VSC.Shared
             if (path.ToLower().Contains("thinprint")) return false;
             if (path.ToLower().Contains("group policy")) return false;
 
-            //if (path.ToLower().Contains("windows phone")) return false;
-            //if (path.ToLower().Contains("winrt")) return false;
-            //if (path.ToLower().Contains("setupcache")) return false;
-            //if (path.ToLower().Contains("arm"))
-            //{
-            //    int idx = path.ToLower().IndexOf("arm");
-            //    return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
-            //}
+            if (path.ToLower().Contains("windows phone")) return false;
+            if (path.ToLower().Contains("winrt")) return false;
+            if (path.ToLower().Contains("setupcache")) return false;
+            if (path.ToLower().Contains("arm"))
+            {
+                int idx = path.ToLower().IndexOf("arm");
+                return char.IsLetter(path[idx - 1]) && char.IsLetter(path[idx + 3]);
+            }
 
             //if (path.Contains("ProgramData\\Microsoft\\Windows\\Start Menu\\Programs")) return false;
             if (path.Contains("ProgramData\\Package Cache")) return false;
