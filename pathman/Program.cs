@@ -23,12 +23,7 @@ namespace pathman
                     case "/rs":
                         string[] path = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.Machine).Split(new char[] { ';' });
                         var keys = path.Select(t => { if (t != args[1]) return t; else return ""; }).ToArray();
-                        string newpath = "";
-                        foreach (var key in keys)
-                        {
-                            if (key != "")
-                                newpath += key + ";";
-                        }
+                        string newpath = string.Join(";",keys);
                         Environment.SetEnvironmentVariable("Path", newpath, EnvironmentVariableTarget.Machine);
                         break;
                     case "/2017":
@@ -44,7 +39,7 @@ namespace pathman
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
             }
         }
     }
