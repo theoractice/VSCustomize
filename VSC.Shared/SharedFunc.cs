@@ -9,8 +9,8 @@ namespace VSC.Shared
 {
     public class SharedFunc
     {
-        public static string vsName = "2013";
-        public static string vsVersion = "12.0";
+        public static string vsName = "2015";
+        public static string vsVersion = "14.0";
         public static string programFiles = "Program Files";
 
         public static bool isValidPath(string path)
